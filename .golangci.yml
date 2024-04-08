@@ -1,0 +1,100 @@
+run:
+  skip-dirs:
+    - vendor
+    - mock
+
+  #modules-download-mode: vendor
+
+output:
+  # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
+  format: colored-line-number
+
+linters-settings:
+  revive:
+    rules:
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#var-naming
+      - name: var-naming
+        severity: warning
+        disabled: false
+        arguments:
+          - [ "ID", "URL", "RPC" ] # AllowList
+          - [ "VM" ] # DenyList
+          - - upperCaseConst: true
+  govet:
+    check-shadowing: true
+  gocyclo:
+    min-complexity: 30
+  dupl:
+    threshold: 200
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  misspell:
+    locale: US
+  lll:
+    line-length: 240
+  goimports:
+    local-prefixes: mrps-game/
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - performance
+      - style
+      - experimental
+    disabled-checks: [ ]
+    settings:
+      hugeParam:
+        sizeThreshold: 256
+  funlen:
+    lines: 150
+    statements: 70
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - dogsled
+    - dupl
+    - errcheck
+    - exportloopref
+    - funlen
+    - goconst
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - lll
+    - misspell
+    - nakedret
+    - revive
+    - staticcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+
+issues:
+  exclude-rules:
+    - path: _test.go
+      linters:
+        - deadcode
+        - dogsled
+        - dupl
+        - funlen
+        - gocritic
+        - gosec
+        - govet
+        - ill
+        - ineffassign
+        - noctx
+        - unused
+
+    - text: "(var|const|method|func|struct field|type) .* should be .*"
+      linters:
+        - stylecheck

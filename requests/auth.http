@@ -1,0 +1,29 @@
+###
+# @name register
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "username": "Player #1",
+  "password": "password123"
+}
+
+###
+# @name login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "Player #1",
+  "password": "password123"
+}
+
+###
+# @name login
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "Player #2",
+  "password": "password123"
+}
